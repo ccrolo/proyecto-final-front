@@ -1,0 +1,15 @@
+.personal_bg{
+    background-image:  url("../../assets/airplane2.jpeg") ;  
+   /*  background-size: cover;   */
+    background-position:top;
+    background-attachment: fixed; 
+    background-position:top;
+    font-family: "Iron";
+    font-size: 1.3rem;
+    min-height: 100vh;
+  
+}
+
+.card_add:hover{
+    transform: scale(1.2);
+}

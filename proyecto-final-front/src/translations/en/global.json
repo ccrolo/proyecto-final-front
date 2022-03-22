@@ -1,0 +1,34 @@
+{
+    "header": {
+        "hello-world": "Hello World"
+    },
+
+    "landing":{
+        "sign-in": "Sign In",
+        "sign-up": "Sign Up"
+    },
+
+    "iniciar-sesion":{
+        "email":"Email",
+        "enterMail": "Enter your email",
+        "password":"Password",
+        "enterPassword": "Enter your password",
+        "name":"Name",
+        "lastname":"Lastname",
+        "user":"User",
+        "submit":"Submit",
+        "enterName":"Enter your name",
+        "enterLastname":"Enter your lastname",
+        "enterUser":"Enter your user name"
+    },
+
+    "footer-options":{
+
+        "title": "What can you do?",
+        "option1":"Organize your trip",
+        "option2":"Save your bookings",
+        "option3":"Looking for new ideas",
+        "option4":"Save your amazing trips"
+    }
+
+}

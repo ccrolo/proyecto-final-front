@@ -1,0 +1,20 @@
+
+.container_bg{
+   
+   background-image: url("./../../assets/edit.jpg");
+   background-size: cover;
+   background-position:top;
+   background-attachment: fixed; 
+ 
+}
+
+
+
+.txt_options{
+   font-family: "Iron";
+}
+
+
+
+
+

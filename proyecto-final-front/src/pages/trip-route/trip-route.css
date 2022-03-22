@@ -1,0 +1,25 @@
+.trip_bg{
+    background-image:  url("../../assets/airplane3.jpeg") ;  
+    /*  background-size: contain; */    
+    background-position:top;
+    background-attachment: fixed; 
+    background-position:bottom;
+    font-family: "Iron";
+    font-size: 1.3rem;
+    min-height: 100vh;
+  
+}
+
+.card_add:hover{
+    transform: scale(1.2);
+}
+
+.input{
+/*  width: 0.1px;
+ height: 0.1px; */
+ /* opacity: 0; */
+ overflow: hidden;
+ position: absolute; 
+ /* z-index: -1; */
+ 
+} 

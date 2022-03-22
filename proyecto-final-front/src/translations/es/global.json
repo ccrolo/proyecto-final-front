@@ -1,0 +1,31 @@
+{
+    "header": {
+        "hello-world": "Hola Mundo que pasaaaa"
+    },
+    "landing":{
+        "sign-in": "Iniciar Sesión",
+        "sign-up": "Registrarse"
+    },
+    "iniciar-sesion":{
+        "email":"Email",
+        "enterMail": "Introduce tu correo",
+        "password":"Contraseña",
+        "enterPassword": "Introduce tu contraseña",
+        "name":"Nombre",
+        "lastname":"Apellidos",
+        "user":"Usuario",
+        "submit":"Enviar",
+        "enterName":"Introduce tu nombre",
+        "enterLastname":"Introduce tus apellidos",
+        "enterUser":"Introduce tu nombre de usuario"
+    },
+
+    "footer-options":{
+
+        "title": "Que puedes hacer?",
+        "option1":"Organiza tu viaje",
+        "option2":"Guarda tus reservas",
+        "option3":"Busca nuevas ideas",
+        "option4":"Guarda tus viajes"
+    }
+}
