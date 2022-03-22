@@ -1,0 +1,28 @@
+
+
+.card_style_carousel{
+    font-family: "Iron";
+    margin-top: 30%;
+    border-radius: 40px;
+}
+
+.card_position{
+    position: absolute;
+    z-index: 3;
+}
+
+.image_card{
+    
+   height: 100%;
+   object-fit: cover;
+   filter:brightness(50%);
+  
+}
+
+.position_title{
+    margin-bottom: 25%;
+}
+
+.image_card:hover{
+    filter:brightness(90%);
+}

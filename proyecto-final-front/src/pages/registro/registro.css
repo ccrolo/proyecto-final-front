@@ -1,0 +1,8 @@
+.registro-bg{
+    background-image: url("../../assets/passport.webp") ;  
+    background-position:top;
+    background-attachment: fixed; 
+    font-family: "Iron";
+    font-size: 1.3rem;
+    
+}
