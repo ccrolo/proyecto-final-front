@@ -25,7 +25,7 @@ function Header() {
     const { theme, updateTheme, changeTheme,logName, setLogName  } = useContext(themeContext)
 
     const userName = localStorage.getItem('name')
-    console.log(userName)
+   
     
 
 

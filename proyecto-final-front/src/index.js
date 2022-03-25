@@ -7,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
+import 'leaflet/dist/leaflet.css'
 
 
 import global_es from "./translations/es/global.json"

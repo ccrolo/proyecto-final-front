@@ -5,7 +5,7 @@ import { React } from 'react';
 
 function PrivateLogin({children}) {
     const location = useLocation();
-    console.log(location)
+    
     const token=localStorage.getItem('token')
 
     if (token === null) {

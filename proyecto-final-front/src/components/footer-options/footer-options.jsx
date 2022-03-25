@@ -47,7 +47,7 @@ function FooterOptions() {
                     style={{ width: "93%" }}
                 >
                     <Col
-                        className="txt_options fs-3 mt-3"
+                        className="txt_options fs-5 mt-3"
                         xs={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
@@ -61,13 +61,13 @@ function FooterOptions() {
                             </Card.Text>
                         </Card>
                         <Card
-                            className="mb-5 h-75  rounded-circle "
+                            className="mb-5 pt-2 pb-2  rounded-circle "
                             bg={theme.dark}>
                             <Image className="w-75 m-auto" src={punto} />
                         </Card>
                     </Col>
                     <Col
-                        className="txt_options fs-3 mt-3"
+                        className="txt_options fs-5 mt-3"
                         sx={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
@@ -81,13 +81,13 @@ function FooterOptions() {
                             </Card.Text>
                         </Card>
                         <Card
-                            className="mb-5 h-75  rounded-circle "
+                            className="mb-5 pt-2 pb-2  rounded-circle "
                             bg={theme.dark}>
                             <Image className="w-75 m-auto" src={billete} />
                         </Card>
                     </Col>
                     <Col
-                        className="txt_options fs-3 mt-3"
+                        className="txt_options fs-5 mt-3"
                         sx={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
@@ -101,13 +101,13 @@ function FooterOptions() {
                             </Card.Text>
                         </Card>
                         <Card
-                            className="mb-5 h-75  rounded-circle "
+                            className="mb-5 pt-2 pb-2  rounded-circle "
                             bg={theme.dark}>
                             <Image className="w-75 m-auto" src={travel} />
                         </Card>
                     </Col>
                     <Col
-                        className="txt_options fs-3 mt-3"
+                        className="txt_options fs-5 mt-3"
                         sx={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
@@ -121,7 +121,7 @@ function FooterOptions() {
                             </Card.Text>
                         </Card>
                         <Card
-                            className="mb-5 h-75  rounded-circle "
+                            className="mb-5 pt-2 pb-2  rounded-circle "
                             bg={theme.dark}>
                             <Image className="w-75 m-auto" src={maleta} />
                         </Card>

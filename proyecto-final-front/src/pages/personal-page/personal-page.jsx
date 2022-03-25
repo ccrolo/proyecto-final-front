@@ -21,7 +21,7 @@ function PersonalPage() {
 
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-    console.log(token)
+    console.log(user)
 
     useEffect(() => {
         fetch('http://localhost:4000/users', {
@@ -32,6 +32,7 @@ function PersonalPage() {
             .then(r => r.json())
             .then(info => {
                 updateUser(info)
+                localStorage.setItem('ID', info._id)
                 console.log(info)
             })
 
@@ -77,13 +78,13 @@ function PersonalPage() {
                         sm={{ span: 2, offset: 8 }}
                         md={{ span: 3, offset: 6 }}
                         lg={{ span: 2, offset: 8 }}
-                        xl={{ span: 1, offset: 8 }}>
+                        xl={{ span: 2, offset: 8 }}>
 
                         <Card onClick={handlerToTravel}
                             style={{ width: "100px", height:"100px" }}
                             text={theme.info}
                             bg={theme.warning}
-                            className="card_add rounded-circle me-5 mt-5 p-1"
+                            className="card_add rounded-circle mt-5 p-1"
                             >
                 
                             <Image
