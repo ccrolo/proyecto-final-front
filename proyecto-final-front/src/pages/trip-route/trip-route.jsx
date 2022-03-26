@@ -51,7 +51,7 @@ function TripRoute() {
     const [marker, updateMarker] = useState([])
     const [nextCity, nextCityUpdate] = useState('')
     const [rute, ruteUpdate] = useState([])
-    const [counter, setCounter] = useState(0)
+    const [counter, setCounter] = useState([])
 
 
     // Añadir marcadores haciendo click en el mapa
@@ -118,20 +118,49 @@ function TripRoute() {
     const addPlace = e => {
         const cityObj = {
             name: nextCity,
-            number: counter + 1,
-            positions: marker
+            number: titleCard.length + 1,
+            positions: marker,
+            
         }
         titleCardUpdate((titleCard) => [...titleCard, cityObj])
         ruteUpdate([...rute, marker])
         setCounter(e => e + 1)
 
-        /* titleCardUpdate((titleCard) =>[titleCard.pop()])
-          updateMarker((marker) => [marker.pop()]) */
-
     }
 
     console.log(rute)
     console.log(titleCard)
+
+    const handleDelete = () => {
+        const position = titleCard.findIndex(e => e.number)
+        titleCard.splice(position, 1)
+        titleCardUpdate([...titleCard])
+        localStorage.removeItem('text')
+    }
+    const id = localStorage.getItem('ID')
+    const token = localStorage.getItem('token')
+
+   const SaveTrip = () => {
+    fetch(`http://localhost:4000/travels/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(titleCard),
+        headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${token}` }
+      })
+        .then(d => d.json())
+        .then((data) => {
+          fetch('http://localhost:4000/users', {
+            method: 'GET',
+            headers: { 'Authorization': `Bearer ${data.access_token}` }
+          })
+            .then(r => r.json())
+            .then(info => {
+              console.log(info)
+              
+            })
+         
+        })
+  
+   }
 
     // Marcadores
     delete L.Icon.Default.prototype._getIconUrl;
@@ -141,6 +170,8 @@ function TripRoute() {
         iconUrl: require('leaflet/dist/images/marker-icon.png'),
         shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     });
+
+
 
     return (
 
@@ -240,13 +271,18 @@ function TripRoute() {
                                     <Card
                                         style={{ backgroundColor: "rgb(252, 250, 244, 0.2)", borderRadius: "10px", width: "100%", height: "350px" }}
                                         className="p-2 border-0 scroll">
-                                        {titleCard.map(c => c === undefined ? '' : <CardRoute title={c.name} number={c.number} /* {SetCounter([...counter,counter.length + 1])} */ />)}
-
+                                        {titleCard.map(c => c === undefined ? '' : <CardRoute title={c.name} number={c.number} delete={handleDelete} /* {SetCounter([...counter,counter.length + 1])} */ />)}
                                     </Card>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                <Button onClick={SaveTrip}>Guardar</Button>
                                 </Col>
                             </Row>
                         </Card>
                     </Col>
+
                     <Col
                         className=" m-auto mb-5"
                         xs={{ span: 10, offset: 1 }}
@@ -254,7 +290,6 @@ function TripRoute() {
                         md={{ span: 8, offset: 2 }}
                         lg={{ span: 5, offset: 0 }}
                         xl={{ span: 5, offset: 0 }}>
-
                         <Card
                             className="mt-5 border-0 mb-1 ms-3 me-3 p-3  text-center"
                             style={{ backgroundColor: "rgb(58, 74, 61,0.6)", width: "100%", height: "100vh" }}>
@@ -269,7 +304,6 @@ function TripRoute() {
                                         Añadir
                                     </Button>
                                 </Card.Text>
-
                             </Card>
                             {center !== undefined ?
                                 <MapContainer
@@ -279,7 +313,6 @@ function TripRoute() {
                                 >
                                     <TileLayer
                                         url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-
                                     />
                                     <MapChangeCenter center={center} zoom={5} />
 
@@ -288,8 +321,6 @@ function TripRoute() {
 
                                     {rute !== null ? '' : rute.map(r => <Marker position={r[0]} />)}
                                     < AddMarker />
-
-                                    <Polyline positions={rute} />
 
                                 </MapContainer> : <Image className="gif" src={gif} />}
                         </Card>
