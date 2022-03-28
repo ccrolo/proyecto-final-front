@@ -9,16 +9,18 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button"
 
 function CardRoute(props) {
-    const { theme, updateTheme, changeTheme, logName, setLogName } = useContext(themeContext)
+    const { theme, updateTheme, changeTheme, logName, setLogName,cardsText, setCardsText } = useContext(themeContext)
     const [input, setinput] = useState('')
     const [text, setText] = useState('')
-    const [inputText, setinputText] = useState('')
+    const [inputText, setinputText] = useState('') 
 
     const handleOnSubmit = e => {
         e.preventDefault()
         setinput('disabled')
         setText(e.target.description.value)
         localStorage.setItem('text', e.target.description.value)
+        setCardsText(e.target.description.value)
+
 
     }
 
@@ -30,7 +32,7 @@ function CardRoute(props) {
 
     }
 
-     
+     console.log(cardsText)
 
 
 

@@ -69,7 +69,7 @@ function PersonalPage() {
     return (
         <React.Fragment>
             <Header />
-            <Container fluid style={{ width: "100%" }} className="personal_bg">
+            <Container  fluid style={{ width: "100%", backgroundColor:"transparent" }} className="personal_bg">
                 <Row>
                     <Col className=" d-inline-flex gap-5 justify-content-center mt-2">
                        

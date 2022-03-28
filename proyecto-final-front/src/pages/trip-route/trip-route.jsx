@@ -30,7 +30,7 @@ function MapChangeCenter({ center, zoom }) {
 }
 
 function TripRoute() {
-
+    const { theme, updateTheme, changeTheme, inputText, setInputText, cardsText, setCardsText } = useContext(themeContext)
     const [t, i18n] = useTranslation("global")
     const [currentPosition, updateCurrentPosition] = useState()
     const [position, setPosition] = useState('');
@@ -116,6 +116,7 @@ function TripRoute() {
             name: nextCity,
             number: titleCard.length + 1,
             positions: marker,
+            text: cardsText
            /*  positions:positionsArray */
 
 
@@ -126,7 +127,7 @@ function TripRoute() {
         setButtonDisabled('disabled')
 
     }
-    console.log(rute)
+    console.log(cardsText)
 
 
 

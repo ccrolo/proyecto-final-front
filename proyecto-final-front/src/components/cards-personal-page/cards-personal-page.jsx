@@ -10,6 +10,8 @@ import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import { Map, MapContainer, TileLayer, Marker, Polyline, Popup, useMap, useMapEvents } from "react-leaflet";
 import L from 'leaflet';
+import { useContext } from "react"
+import { themeContext } from "../../context/themeContext"
 
 
 
@@ -19,7 +21,7 @@ import L from 'leaflet';
 
 
 function CardsPersonalPage() {
-
+    const { theme, updateTheme, changeTheme } = useContext(themeContext)
     const token = localStorage.getItem('token')
     const [tripCards, setTripCards] = useState([])
 
@@ -31,7 +33,8 @@ function CardsPersonalPage() {
         shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     });
 
-
+   
+    
 
     useEffect(() => {
         fetch('http://localhost:4000/travels', {
@@ -47,16 +50,18 @@ function CardsPersonalPage() {
                 setTripCards(data)
 
             })
-
     }, []
     )
 
     const coord = []
     const trip = tripCards.map(t => Object.values(t))
     const arraytrip = trip.map(c => c.map(p => Object.values(p)))
-    const tripArr = arraytrip.map( c => c.pop())
+    const tripArr = arraytrip.map(c => c.pop())
 
-    console.log(arraytrip)
+    
+    
+    
+    
     return (
         <Container className="container" fluid style={{ width: "100%" }}>
             <Row >
@@ -79,12 +84,13 @@ function CardsPersonalPage() {
 
 
                             <Card
-                                style={{ width: "50%", height: "450px" }}
+                                bg="transparent"
+                                style={{ width: "50%", height: "450px", backgroundColor: "transparent" }}
                                 className="border-0"
                             >
                                 <Carousel
 
-                                    style={{ width: "100%", height: "450px" }}
+                                    style={{ width: "100%", height: "450px", backgroundColor: "transparent" }}
                                     interval={null}
                                     className="mb-5  pb-4">
 
@@ -94,43 +100,47 @@ function CardsPersonalPage() {
 
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <Card style={{ width: "100%", height: "450px" }} >
-                                            {t.map(c => <Card.Text  >{c[1]}</Card.Text>)}
+
+                                        <Card
+                                            text={theme.info}
+                                            bg={theme.primary}
+                                            style={{ width: "100%", height: "450px" }}
+                                        >
+                                            {t.map(c => <Card bg="transparent" className="border-0">
+                                                <Card style={{ color: "white", borderRadius: "50%", width: "30px", height: "30px" }}
+                                                    bg={theme.warning}
+
+                                                    className="me-1 mt-2  text-center" >{c[2]}</Card>
+                                                <Card bg="transparent" className=" border-0"> {c[1]}</Card>
+                                            </Card>)}
 
                                         </Card>
-                                    </Carousel.Item>
-                                    <Carousel.Item>
 
-                                        <Carousel.Caption>
-
-                                            <h3>Third slide label</h3>
-                                            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                                        </Carousel.Caption>
                                     </Carousel.Item>
                                 </Carousel>
                             </Card>
 
-                             <Card
+                            <Card
 
                                 style={{ width: "50%", height: "450px" }}>
-                                 {t[0][3][0] !== undefined ?
-                                     <MapContainer
+                                {t[0][3][0] !== undefined ?
+                                    <MapContainer
                                         className="card_img"
                                         style={{ width: "100%", height: "450px" }}
                                         center={t[0][3][0]}
-                                        zoom={5}
+                                        zoom={4}
                                     >
                                         <TileLayer
                                             url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                                         />
-                                           
-                                             {t.map(p => p=== null ?'': <Marker
-                                            position={p[3][0]} > <Popup>{p[2]}. {p[1]}</Popup> </Marker>)}  
-  
-                                        <Polyline positions={t.map(p => p[3][0])}/>
 
-                                    </MapContainer> : ''} 
-                            </Card> 
+                                        {t.map(p => p === null ? '' : <Marker
+                                            position={p[3][0]} > <Popup>{p[2]}. {p[1]}</Popup> </Marker>)}
+
+                                        <Polyline positions={t.map(p => p[3][0])} />
+
+                                    </MapContainer> : ''}
+                            </Card>
                         </Card>
                         {/*  {t => t.map( c =>  <Card style={{ width: "100%", height: "450px" }} >{c.name}</Card> )}  */}
 
