@@ -17,6 +17,7 @@ import PersonalData from "./pages/personal-data/personal-data";
 
 
 
+
 function App() {
   return (
     <React.Fragment>
@@ -33,6 +34,7 @@ function App() {
           <Route path='/personal' element={<PrivateLogin><PersonalPage /></PrivateLogin>}></Route>
           <Route path='/trip' element={<PrivateLogin><TripRoute/></PrivateLogin>}></Route>
           <Route path='/data' element={<PrivateLogin><PersonalData/></PrivateLogin>}></Route>
+         
         </Routes>
       
 

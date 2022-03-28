@@ -11,9 +11,14 @@
 }
 
 .card_add{
-    position: fixed;
-    margin-right: 30px;
+    margin-left: 30%;
+    margin-bottom: 20px;
+    
 }
 .card_add:hover{
     transform: scale(1.2);
+}
+
+.buttons{
+    height: 40px;
 }

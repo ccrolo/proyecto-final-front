@@ -14,14 +14,15 @@ import add from "../../assets/add.png"
 import { Link } from "react-router-dom";
 import { themeContext } from "../../context/themeContext";
 import { useContext } from "react";
+import CardsPersonalPage from "../../components/cards-personal-page/cards-personal-page";
 
 function PersonalPage() {
     const [user, updateUser] = useState([])
-    const { theme, updateTheme, changeTheme } = useContext(themeContext)
+    const { theme, mapDetails, setMapDetails } = useContext(themeContext)
 
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-    console.log(user)
+   
 
     useEffect(() => {
         fetch('http://localhost:4000/users', {
@@ -33,7 +34,7 @@ function PersonalPage() {
             .then(info => {
                 updateUser(info)
                 localStorage.setItem('ID', info._id)
-                console.log(info)
+                
             })
 
     }, [])
@@ -45,13 +46,15 @@ function PersonalPage() {
         })
             .then(j => j.json())
             .then(data => {
-                console.log(data)
+                
             })
 
         localStorage.removeItem('token');
         localStorage.removeItem('name');
         navigate('/')
     }
+
+
 
     const handlerEndSesion = () => {
         localStorage.removeItem('token');
@@ -68,23 +71,16 @@ function PersonalPage() {
             <Header />
             <Container fluid style={{ width: "100%" }} className="personal_bg">
                 <Row>
-                    <Col>
-                        <Button onClick={handleDelete}>Darte de baja</Button>
-                        <Button onClick={handlerEndSesion}>Cerrar Sesión</Button>
-                        <Button as={Link} to="/data">Tus datos personales</Button>
-                    </Col>
-                    <Col
-                        xs={{ span: 2, offset: 8 }}
-                        sm={{ span: 2, offset: 8 }}
-                        md={{ span: 3, offset: 6 }}
-                        lg={{ span: 2, offset: 8 }}
-                        xl={{ span: 2, offset: 8 }}>
-
+                    <Col className=" d-inline-flex gap-5 justify-content-center mt-2">
+                       
+                        <Button className="buttons"  onClick={handleDelete}>Darte de baja</Button>
+                        <Button className="buttons" onClick={handlerEndSesion}>Cerrar Sesión</Button>
+                        <Button className="buttons" as={Link} to="/data">Tus datos personales</Button>
                         <Card onClick={handlerToTravel}
                             style={{ width: "100px", height:"100px" }}
                             text={theme.info}
                             bg={theme.warning}
-                            className="card_add rounded-circle mt-5 p-1"
+                            className="card_add rounded-circle"
                             >
                 
                             <Image
@@ -93,9 +89,15 @@ function PersonalPage() {
                                 
                                 />
                         </Card>
-
+                       
                     </Col>
+                    
 
+                </Row>
+                <Row>
+                    <Col>
+                    <CardsPersonalPage/>
+                    </Col>
                 </Row>
             </Container>
             <Footer />

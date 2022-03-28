@@ -35,11 +35,11 @@ function Header() {
         <React.Fragment>
           
             <Navbar style={{ fontFamily: "Iron" }} sticky="top" bg={theme.dark} collapseOnSelect expand="lg" >
-                <Container>
+                <Container fluid className="container_header">
                     <Navbar.Brand as={Link} to="/">
-                        <Image className="logo" src={Logo} />
+                        <Image className="ms-5 logo" src={Logo} />
                         <Card className="text-center mt-4 ms-5 d-inline-flex border-0 bg-transparent" text={theme.info} >
-                            <Card.Text className="title  display-4">Bitacora</Card.Text>
+                            <Card.Text className="title  display-4">Bitácora</Card.Text>
                         </Card>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />

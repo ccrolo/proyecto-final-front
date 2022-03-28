@@ -29,6 +29,7 @@ function ThemeProvider({ children }) {
 
     const [theme, updateTheme] = useState(lightTheme)
     const [logName, setLogName]= useState('')
+    
    
 
     const changeTheme = () => {
@@ -38,7 +39,7 @@ function ThemeProvider({ children }) {
 
     const footer= (theme === lightTheme?"rgba(255,255,255,0.5)":"rgb(58, 74, 61,0.6)")
 
-    return <themeContext.Provider value={{theme, updateTheme, changeTheme, footer,logName, setLogName }}>{children}</themeContext.Provider>
+    return <themeContext.Provider value={{theme, updateTheme, changeTheme, footer,logName, setLogName}}>{children}</themeContext.Provider>
 
 }
 

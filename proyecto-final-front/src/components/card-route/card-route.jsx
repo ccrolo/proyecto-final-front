@@ -106,7 +106,7 @@ function CardRoute(props) {
                                 className="mt-3 border-0 bg-transparent focus"
                                 name="description"
                                 type="textarea"
-                                placeholder="Pues escribir aquí"
+                                placeholder="Puedes escribir aquí"
                                 defaultValue={inputText} 
 
                             /><Button type="submit">Guardar</Button>  </Form>

@@ -21,7 +21,7 @@ function Footer() {
         className="sticky-bottom"
         
         >
-            <Container className="mt-5" >
+            <Container fluid className="mt-5" >
                 
             </Container>
         </Navbar>

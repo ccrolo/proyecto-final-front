@@ -19,20 +19,9 @@ import Button from "react-bootstrap/Button";
 import gif from "../../assets/gif3.gif"
 import { use } from "i18next";
 import CardRoute from "../../components/card-route/card-route"
+import Modal from "react-bootstrap/Modal"
 
 
-// Hacer que cada viaje tenga su ruta:
-// 1. Primero indicar en que lugar se va a hacer el viaje --> Posicionará el mapa
-//  a) Crear Input donde incluimos nombre --> Buscar coordenadas con el nombre.
-//  b) Primero probar dando directamente las coordenadas
-// 2. Incluir un marcador en cada punto del viaje --> Debe guardarse en un array cada punto
-//  a) Debemos encontrar ubicación según nombre
-//  b) Debe incluir lat y lon para posicionarse
-// 3. Debe guardarse el nombre de cada lugar en una lista numerada
-// 4. Cuando se haga click o hover sobre un punto debe señalarse en el mapa.
-// 5. Debe poderse incluir un archivo con los datos de reservas de ese punto.
-// 6. Cada usuario debe tener todos los datos --> Objeto?
-// 7. Deberá guardarse en BBDD según ID único de cada usuario
 
 function MapChangeCenter({ center, zoom }) {
     const map = useMap();
@@ -40,19 +29,26 @@ function MapChangeCenter({ center, zoom }) {
     return null;
 }
 
-
 function TripRoute() {
 
     const [t, i18n] = useTranslation("global")
     const [currentPosition, updateCurrentPosition] = useState()
     const [position, setPosition] = useState('');
-    const [center, updateCenter] = useState(currentPosition)
+    const [center, updateCenter] = useState()
     const [titleCard, titleCardUpdate] = useState([])
     const [marker, updateMarker] = useState([])
     const [nextCity, nextCityUpdate] = useState('')
     const [rute, ruteUpdate] = useState([])
     const [counter, setCounter] = useState([])
+    const [titleTrip, setTitleTrip] = useState('')
+    const [buttonDisabled, setButtonDisabled] = useState('')
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    let navigate = useNavigate();
 
     // Añadir marcadores haciendo click en el mapa
     const AddMarker = () => {
@@ -85,6 +81,7 @@ function TripRoute() {
 
         const firstCity = e.target.firstCity.value
         nextCityUpdate(firstCity)
+        
 
         fetch(`http://api.positionstack.com/v1/forward?access_key=45c3db208fca50fb47eda23e4b198c24&query=${firstCity}`)
             .then(d => d.json())
@@ -110,26 +107,28 @@ function TripRoute() {
                 console.log(data)
                 /* updateMarker((marker) => [...marker, [data.data[0].latitude, data.data[0].longitude]]) */
                 updateMarker((marker) => [[data.data[0].latitude, data.data[0].longitude]])
-
             })
-
     }
 
     const addPlace = e => {
         const cityObj = {
+            title: titleTrip,
             name: nextCity,
             number: titleCard.length + 1,
             positions: marker,
-            
+           /*  positions:positionsArray */
+
+
         }
-        titleCardUpdate((titleCard) => [...titleCard, cityObj])
+        titleCardUpdate([...titleCard, cityObj])
         ruteUpdate([...rute, marker])
         setCounter(e => e + 1)
+        setButtonDisabled('disabled')
 
     }
-
     console.log(rute)
-    console.log(titleCard)
+
+
 
     const handleDelete = () => {
         const position = titleCard.findIndex(e => e.number)
@@ -140,27 +139,26 @@ function TripRoute() {
     const id = localStorage.getItem('ID')
     const token = localStorage.getItem('token')
 
-   const SaveTrip = () => {
-    fetch(`http://localhost:4000/travels/${id}`, {
-        method: 'PUT',
-        body: JSON.stringify(titleCard),
-        headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${token}` }
-      })
-        .then(d => d.json())
-        .then((data) => {
-          fetch('http://localhost:4000/users', {
-            method: 'GET',
-            headers: { 'Authorization': `Bearer ${data.access_token}` }
-          })
-            .then(r => r.json())
-            .then(info => {
-              console.log(info)
-              
-            })
-         
+    const handleTitle = e => {
+        e.preventDefault()
+
+        const title = e.target.tripName.value
+        setTitleTrip(title)
+    }
+
+    const SaveTrip = () => {
+
+        fetch(`http://localhost:4000/travels`, {
+            method: 'POST',
+            body: JSON.stringify(titleCard, titleTrip),
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
         })
+            .then(d => d.json())
+        setTimeout(() => { navigate('/personal') }, 3000);
+
+    }
+
   
-   }
 
     // Marcadores
     delete L.Icon.Default.prototype._getIconUrl;
@@ -170,8 +168,10 @@ function TripRoute() {
         iconUrl: require('leaflet/dist/images/marker-icon.png'),
         shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     });
+     const positionsArray =[]
+    const poly = rute.map( c => positionsArray.push(c[0]))
 
-
+    console.log(positionsArray) 
 
     return (
 
@@ -224,7 +224,7 @@ function TripRoute() {
                                                 />
                                             </Col>
                                             <Col>
-                                                <Button className=" add_button mt-3 mb-3" type="submit">Buscar</Button>
+                                                <Button disabled={buttonDisabled === 'disabled'} className=" add_button mt-3 mb-3" type="submit">Buscar</Button>
                                             </Col>
                                         </Row>
                                     </Form>
@@ -277,7 +277,30 @@ function TripRoute() {
                             </Row>
                             <Row>
                                 <Col>
-                                <Button onClick={SaveTrip}>Guardar</Button>
+                                    <Button className="mt-5" variant="primary" onClick={handleShow}>
+                                        Guardar
+                                    </Button>
+
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Pon un nombre a tu viaje</Modal.Title>
+                                        </Modal.Header>
+                                        <Form onSubmit={handleTitle}>
+                                            <Form.Control
+                                                className="mt-3"
+                                                name="tripName"
+                                                type="text"
+                                                placeholder="Dame un título"
+                                            />
+
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                            <Button type="submit" variant="primary" onClick={SaveTrip}>
+                                                Save Changes
+                                            </Button>
+                                        </Form>
+                                    </Modal>
                                 </Col>
                             </Row>
                         </Card>
@@ -319,8 +342,10 @@ function TripRoute() {
                                     {marker.map(m => <Marker
                                         position={m} />)}
 
-                                    {rute !== null ? '' : rute.map(r => <Marker position={r[0]} />)}
+                                    {rute === null ? '' : rute.map(r => <Marker position={r[0]} />)}
                                     < AddMarker />
+
+                                    <Polyline positions={positionsArray}/> 
 
                                 </MapContainer> : <Image className="gif" src={gif} />}
                         </Card>
