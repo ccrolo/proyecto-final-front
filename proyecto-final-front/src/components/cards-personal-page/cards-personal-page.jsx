@@ -12,11 +12,9 @@ import { Map, MapContainer, TileLayer, Marker, Polyline, Popup, useMap, useMapEv
 import L from 'leaflet';
 import { useContext } from "react"
 import { themeContext } from "../../context/themeContext"
-
-
-
-
-
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
+import CardsTitle from "../cards-title/cards-title"
 
 
 
@@ -24,6 +22,9 @@ function CardsPersonalPage() {
     const { theme, updateTheme, changeTheme } = useContext(themeContext)
     const token = localStorage.getItem('token')
     const [tripCards, setTripCards] = useState([])
+    const [input, setinput] = useState('')
+    const [text, setText] = useState('')
+    const [inputText, setinputText] = useState('')
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -33,8 +34,6 @@ function CardsPersonalPage() {
         shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     });
 
-   
-    
 
     useEffect(() => {
         fetch('http://localhost:4000/travels', {
@@ -50,6 +49,7 @@ function CardsPersonalPage() {
                 setTripCards(data)
 
             })
+
     }, []
     )
 
@@ -58,16 +58,17 @@ function CardsPersonalPage() {
     const arraytrip = trip.map(c => c.map(p => Object.values(p)))
     const tripArr = arraytrip.map(c => c.pop())
 
-    
-    
-    
-    
+
+
+    console.log(arraytrip)
+
     return (
         <Container className="container" fluid style={{ width: "100%" }}>
             <Row >
 
                 {arraytrip.map(t =>
-                    <Col
+                    <Col 
+                       
                         xs={12}
                         sm={12}
                         md={8}
@@ -75,7 +76,7 @@ function CardsPersonalPage() {
                         xl={6}>
 
                         <Card
-                            className="card_container mt-4 border-5 border-warning bottom-0"
+                            className="card_container border-5 border-warning bottom-0"
                             xs={12}
                             sm={6}
                             md={6}
@@ -96,22 +97,28 @@ function CardsPersonalPage() {
 
                                     <Carousel.Item>
 
-                                        <Image className="card_img" src={Japan}></Image>
+
+                                        <Image className="card_img" src={t[1][5]}></Image>
+                                        <Carousel.Caption>
+                                            <CardsTitle />
+                                        </Carousel.Caption>
 
                                     </Carousel.Item>
                                     <Carousel.Item>
 
-                                        <Card
+                                        <Card   
+                                            className=" card_container_scroll"
                                             text={theme.info}
                                             bg={theme.primary}
                                             style={{ width: "100%", height: "450px" }}
                                         >
-                                            {t.map(c => <Card bg="transparent" className="border-0">
+                                            {t.map(c => <Card bg="transparent" className=" m-3 border-0">
                                                 <Card style={{ color: "white", borderRadius: "50%", width: "30px", height: "30px" }}
                                                     bg={theme.warning}
 
                                                     className="me-1 mt-2  text-center" >{c[2]}</Card>
-                                                <Card bg="transparent" className=" border-0"> {c[1]}</Card>
+                                                <Card bg="transparent"  className=" mt-2 border-0"> {c[1]}</Card>
+                                                <Card bg="transparent" style={{fontFamily:"Antique"}} className="fs-2 border-0"> {c[4]}</Card>
                                             </Card>)}
 
                                         </Card>

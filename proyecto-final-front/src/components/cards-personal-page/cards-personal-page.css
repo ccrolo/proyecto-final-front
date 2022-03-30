@@ -20,3 +20,8 @@
    flex-direction: row;
 }
 
+.card_container_scroll{
+   overflow-x:scroll;
+}
+
+.card_container_scroll::-webkit-scrollbar {display: none;}

@@ -36,7 +36,8 @@ function Registro() {
             email: e.target.email.value,
             password: e.target.password.value,
         }
-
+        
+        
 
         usersUpdate(userData)
 
@@ -138,26 +139,7 @@ function Registro() {
                                     type="submit">
                                     {t("iniciar-sesion.submit")}
                                 </Button>
-                               {/*  <Overlay target={target.current} show={show} placement="right">
-                                    {({ placement, arrowProps, show: _show, popper, ...props }) => (
-                                        <div
-                                            {...props}
-                                            style={{
-                                                backgroundColor: '#303d33',
-                                                border: 'white 1px solid',
-                                                fontSize: '1.3rem',
-                                                margin: '0px 20px',
-                                                padding: '20px 10px',
-                                                color: 'white',
-                                                borderRadius: 3,
-                                                ...props.style,
-                                            }}
-                                        >
-                                            
-                                          {Object.keys(users).length ===  5 ? "Perfecto! Revisa tu correo" : "Rellena los campos requeridos"} 
-                                        </div>
-                                    )}
-                                </Overlay> */}
+                              
                             </Form>
                         </Card>
                     </Col>

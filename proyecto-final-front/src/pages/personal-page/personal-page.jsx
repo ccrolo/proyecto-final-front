@@ -15,14 +15,16 @@ import { Link } from "react-router-dom";
 import { themeContext } from "../../context/themeContext";
 import { useContext } from "react";
 import CardsPersonalPage from "../../components/cards-personal-page/cards-personal-page";
+import { useTranslation } from "react-i18next";
 
 function PersonalPage() {
     const [user, updateUser] = useState([])
     const { theme, mapDetails, setMapDetails } = useContext(themeContext)
+    const [t, i18n] = useTranslation("global");
 
     const token = localStorage.getItem('token')
     const navigate = useNavigate()
-   
+
 
     useEffect(() => {
         fetch('http://localhost:4000/users', {
@@ -34,7 +36,7 @@ function PersonalPage() {
             .then(info => {
                 updateUser(info)
                 localStorage.setItem('ID', info._id)
-                
+
             })
 
     }, [])
@@ -46,7 +48,7 @@ function PersonalPage() {
         })
             .then(j => j.json())
             .then(data => {
-                
+
             })
 
         localStorage.removeItem('token');
@@ -69,34 +71,50 @@ function PersonalPage() {
     return (
         <React.Fragment>
             <Header />
-            <Container  fluid style={{ width: "100%", backgroundColor:"transparent" }} className="personal_bg">
+            <Container fluid style={{ width: "100%", backgroundColor: "transparent" }} className="personal_bg">
                 <Row>
-                    <Col className=" d-inline-flex gap-5 justify-content-center mt-2">
+                    <Col
+                        xs={12}
+                        sm={12}
+                        md={12}
+                        lg={12}
+                        xl={12} className=" d-inline-flex  justify-content-center m-5">
+                        <Col
                        
-                        <Button className="buttons"  onClick={handleDelete}>Darte de baja</Button>
-                        <Button className="buttons" onClick={handlerEndSesion}>Cerrar Sesión</Button>
-                        <Button className="buttons" as={Link} to="/data">Tus datos personales</Button>
-                        <Card onClick={handlerToTravel}
-                            style={{ width: "100px", height:"100px" }}
-                            text={theme.info}
-                            bg={theme.warning}
-                            className="card_add rounded-circle"
+                         xs={8}
+                         sm={8}
+                         md={6}
+                         lg={6}
+                         xl={6}>
+                            <Button className="buttons" onClick={handleDelete}>{t("personal-page.unsuscribe")}</Button>                      
+                            <Button className="buttons" onClick={handlerEndSesion}>{t("personal-page.log-out")}</Button>                    
+                            <Button className="buttons" as={Link} to="/data">{t("personal-page.personal-data")}</Button>
+                        </Col>
+                        <Col  
+                        xs={6}
+                         sm={6}
+                         md={6}
+                         lg={6}
+                         xl={6}>
+                        
+                            <Card onClick={handlerToTravel}
+
+                                text='white'
+                                bg={theme.warning}
+                                className="card_add fs-1 border-5 border-warning"
                             >
-                
-                            <Image
-                                className="w-50 m-auto"
-                                src={add}
-                                
-                                />
-                        </Card>
-                       
+                                +
+
+                            </Card>
+                        </Col>
+
                     </Col>
-                    
+
 
                 </Row>
                 <Row>
                     <Col>
-                    <CardsPersonalPage/>
+                        <CardsPersonalPage />
                     </Col>
                 </Row>
             </Container>

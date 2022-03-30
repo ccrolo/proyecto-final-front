@@ -7,12 +7,14 @@ import Form from "react-bootstrap/Form"
 import "./card-route.css"
 import { useState } from "react";
 import Button from "react-bootstrap/Button"
+import { useTranslation } from "react-i18next";
 
 function CardRoute(props) {
     const { theme, updateTheme, changeTheme, logName, setLogName,cardsText, setCardsText } = useContext(themeContext)
     const [input, setinput] = useState('')
     const [text, setText] = useState('')
     const [inputText, setinputText] = useState('') 
+    const [t, i18n] = useTranslation("global")
 
     const handleOnSubmit = e => {
         e.preventDefault()
@@ -20,6 +22,7 @@ function CardRoute(props) {
         setText(e.target.description.value)
         localStorage.setItem('text', e.target.description.value)
         setCardsText(e.target.description.value)
+       
 
 
     }
@@ -81,8 +84,8 @@ function CardRoute(props) {
                         bg={theme.warning}
                         onClick={getInputText}
                         className="me-1 mt-2 cursor">✎
-
                     </Card>
+
                     <Card style={{ color: "white", borderRadius: "50%", width: "30px", height: "30px" }}
                             bg={theme.warning}
                             onClick={props.delete}
@@ -105,13 +108,13 @@ function CardRoute(props) {
                     {input !== 'disabled' ?
                         <Form onSubmit={handleOnSubmit}>
                             <Form.Control
-                                className="mt-3 border-0 bg-transparent focus"
+                                className="bg-transparent mt-3 border-0"
                                 name="description"
                                 type="textarea"
-                                placeholder="Puedes escribir aquí"
+                                placeholder={t("trip-route.write-here")}
                                 defaultValue={inputText} 
 
-                            /><Button type="submit">Guardar</Button>  </Form>
+                            /><Button type="submit">{t("trip-route.save")}</Button>  </Form>
                         : <Card className="border-0 bg-transparent">{text}</Card>
 
                     }

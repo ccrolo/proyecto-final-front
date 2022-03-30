@@ -68,7 +68,7 @@ function PersonalData() {
                 <Row>
                     <Col
                         style={{}}
-                        className="mt-5"
+                        className="mt-5 "
                         sm={{ span: 10, offset: 1 }}
                         md={{ span: 8, offset: 2 }}
                         lg={{ span: 6, offset: 3 }}
@@ -78,61 +78,63 @@ function PersonalData() {
                             text="white"
                         >
 
-                            <Form.Label className="mt-3" >{t("iniciar-sesion.name")}</Form.Label>
+                            <Form.Label className="mt-3 mx-5" >{t("iniciar-sesion.name")}</Form.Label>
                             <Form.Control
+                                style={{width:'85%'}}
+                                className="mx-5"
                                 name="name"
                                 type="text"
                                 placeholder={t("iniciar-sesion.enterName")}
-                                required
+                                defaultValue={localStorage.getItem('name')}
+                                disabled
 
                             />
 
-                            <Form.Label className="mt-4" >{t("iniciar-sesion.lastname")}</Form.Label>
+                            <Form.Label className="mt-4 mx-5" >{t("iniciar-sesion.lastname")}</Form.Label>
                             <Form.Control
+                                style={{width:'85%'}}
+                                className="mx-5"
                                 name="lastname"
                                 type="text"
-                                placeholder={t("iniciar-sesion.enterLastname")}
-                                required
+                                disabled
+                               
 
                             />
                             <Form onSubmit={handlePatchUser}>
-                                <Form.Label className="mt-4" >{t("iniciar-sesion.user")}</Form.Label>
+                                <Form.Label className="mt-4 mx-5" >{t("iniciar-sesion.user")}</Form.Label>
                                 <Form.Control
+                                    style={{width:'85%'}}
+                                    className="mx-5"
                                     name="username"
                                     type="text"
                                     placeholder={t("iniciar-sesion.enterUser")}
 
 
                                 />
-                                <Button type="submit">Editar</Button>
+                                <Button className="mt-2 mx-5" type="submit">Editar</Button>
                             </Form>
 
 
-                            <Form.Label className="mt-4"> {t("iniciar-sesion.email")}</Form.Label>
+                            <Form.Label className="mt-4 mx-5"> {t("iniciar-sesion.email")}</Form.Label>
                             <Form.Control
+                                style={{width:'85%'}}
+                                className="mx-5"
                                 name="email"
                                 type="email"
-                                placeholder={t("iniciar-sesion.enterMail")}
+                                disabled
 
                             />
 
 
 
-                            <Form.Label className="mt-4">{t("iniciar-sesion.password")}</Form.Label>
+                            <Form.Label className="mt-4 mx-5">{t("iniciar-sesion.password")}</Form.Label>
                             <Form.Control
+                                style={{width:'85%'}}
+                                className="mx-5 mb-5"
                                 name="password"
                                 type="password"
-                                placeholder={t("iniciar-sesion.enterPasword")}
-                                required
+                                disabled
                             />
-
-                            {/* <Button
-                                className="mt-5 fs-4 justify-content-center"
-                                ref={target}
-                                onClick={handleClick}
-                                type="submit">
-                                {t("iniciar-sesion.submit")}
-                            </Button> */}
                         </Card>
                     </Col>
                 </Row>

@@ -29,6 +29,29 @@
         "option2":"Save your bookings",
         "option3":"Looking for new ideas",
         "option4":"Save your amazing trips"
+    },
+
+    "personal-page":{
+        "unsuscribe":"Unsuscribe",
+        "log-out":"Log-out",
+        "personal-data":"Personal Data"
+    },
+
+    "title":{
+        "title-button": "Save",
+        "placeholder": "You can write here"
+    },
+
+    "trip-route":{
+        "travel-start": "Where does your trip start?",
+        "next-stop": "Your next stop?",
+        "search": "Search",
+        "save": "Save",
+        "name-trip": "Name your trip",
+        "name-trip-place-holder":"Give me a name",
+        "close":"Close",
+        "add": "Add",
+        "write-here":"You can write here"
     }
 
 }

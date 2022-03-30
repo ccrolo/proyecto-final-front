@@ -27,5 +27,28 @@
         "option2":"Guarda tus reservas",
         "option3":"Busca nuevas ideas",
         "option4":"Guarda tus viajes"
+    },
+
+    "personal-page":{
+        "unsuscribe":"Darse de baja",
+        "log-out":"Cerrar Sesión",
+        "personal-data":"Tus datos personales"
+    },
+
+    "title":{
+        "title-button": "Guardar",
+        "placeholder": "Puedes escribir aquí"
+    },
+
+    "trip-route":{
+        "travel-start": "Dónde empieza tu viaje?",
+        "next-stop": "Tu siguiente parada?",
+        "search": "Buscar",
+        "save": "Guardar",
+        "name-trip": "Dale un nombre a tu viaje",
+        "name-trip-place-holder":"Dame un nombre",
+        "close":"Cerrar",
+        "add": "Añadir",
+        "write-here":"Puedes escribir aquí"
     }
 }

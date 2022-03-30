@@ -10,17 +10,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image"
 import { useTranslation } from "react-i18next";
-import { ReactFileInputCustom } from 'react-file-input-custom';
 import { themeContext } from "../../context/themeContext";
 import 'leaflet/dist/leaflet.css'
 import { Map, MapContainer, TileLayer, Marker, Polyline, useMap, useMapEvents } from "react-leaflet";
 import L from 'leaflet';
 import Button from "react-bootstrap/Button";
 import gif from "../../assets/gif3.gif"
-import { use } from "i18next";
 import CardRoute from "../../components/card-route/card-route"
 import Modal from "react-bootstrap/Modal"
-
 
 
 function MapChangeCenter({ center, zoom }) {
@@ -42,6 +39,7 @@ function TripRoute() {
     const [counter, setCounter] = useState([])
     const [titleTrip, setTitleTrip] = useState('')
     const [buttonDisabled, setButtonDisabled] = useState('')
+    const [image, setImage] = useState()
 
     const [show, setShow] = useState(false);
 
@@ -49,7 +47,7 @@ function TripRoute() {
     const handleShow = () => setShow(true);
 
     let navigate = useNavigate();
-
+    
     // Añadir marcadores haciendo click en el mapa
     const AddMarker = () => {
 
@@ -100,7 +98,6 @@ function TripRoute() {
         const nextCity = e.target.nextCity.value
         nextCityUpdate(nextCity)
 
-
         fetch(`http://api.positionstack.com/v1/forward?access_key=45c3db208fca50fb47eda23e4b198c24&query=${nextCity}`)
             .then(d => d.json())
             .then(data => {
@@ -110,27 +107,34 @@ function TripRoute() {
             })
     }
 
+    const API = '563492ad6f91700001000001498e5559e2e142e6adaa082120853c99'
+
     const addPlace = e => {
+
+        fetch(`https://api.pexels.com/v1/search?query=${nextCity}`,{
+            method: 'GET',
+            headers: {  'Authorization': `Bearer ${API}` }
+        })
+
+            .then(j => j.json())
+            .then(data => setImage(data.photos[0].src.original))
+               
         const cityObj = {
             title: titleTrip,
             name: nextCity,
             number: titleCard.length + 1,
             positions: marker,
-            text: cardsText
-           /*  positions:positionsArray */
-
-
+            text: localStorage.getItem('text'),
+            image: image
+           
         }
         titleCardUpdate([...titleCard, cityObj])
         ruteUpdate([...rute, marker])
         setCounter(e => e + 1)
         setButtonDisabled('disabled')
-
+       
     }
-    console.log(cardsText)
-
-
-
+    
     const handleDelete = () => {
         const position = titleCard.findIndex(e => e.number)
         titleCard.splice(position, 1)
@@ -151,15 +155,14 @@ function TripRoute() {
 
         fetch(`http://localhost:4000/travels`, {
             method: 'POST',
-            body: JSON.stringify(titleCard, titleTrip),
+            body: JSON.stringify(titleCard),
             headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
         })
             .then(d => d.json())
         setTimeout(() => { navigate('/personal') }, 3000);
 
+        localStorage.removeItem('text')
     }
-
-  
 
     // Marcadores
     delete L.Icon.Default.prototype._getIconUrl;
@@ -207,7 +210,7 @@ function TripRoute() {
                                             <Col >
                                                 <Form.Label
                                                     style={{ backgroundColor: "rgb(252, 250, 244, 0.6)", borderRadius: "10px" }}
-                                                    className="mt-1 p-2" >Donde empieza tu viaje?</Form.Label>
+                                                    className="mt-1 p-2" >{t("trip-route.travel-start")}</Form.Label>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -225,7 +228,7 @@ function TripRoute() {
                                                 />
                                             </Col>
                                             <Col>
-                                                <Button disabled={buttonDisabled === 'disabled'} className=" add_button mt-3 mb-3" type="submit">Buscar</Button>
+                                                <Button disabled={buttonDisabled === 'disabled'} className=" add_button mt-3 mb-3" type="submit">{t("trip-route.search")}</Button>
                                             </Col>
                                         </Row>
                                     </Form>
@@ -235,7 +238,7 @@ function TripRoute() {
                                             <Col >
                                                 <Form.Label
                                                     style={{ backgroundColor: "rgb(252, 250, 244, 0.6)", borderRadius: "10px" }}
-                                                    className="mt-1 p-2" >Tu siguiente parada?</Form.Label>
+                                                    className="mt-1 p-2" >{t("trip-route.next-stop")}</Form.Label>
                                             </Col>
                                         </Row>
                                         <Row>
@@ -253,7 +256,7 @@ function TripRoute() {
                                                 />
                                             </Col>
                                             <Col>
-                                                <Button className="add_button mt-3 mb-3" type="submit">Buscar</Button>
+                                                <Button className="add_button mt-3 mb-3" type="submit">{t("trip-route.search")}</Button>
                                             </Col>
                                         </Row>
                                     </Form>
@@ -272,33 +275,33 @@ function TripRoute() {
                                     <Card
                                         style={{ backgroundColor: "rgb(252, 250, 244, 0.2)", borderRadius: "10px", width: "100%", height: "350px" }}
                                         className="p-2 border-0 scroll">
-                                        {titleCard.map(c => c === undefined ? '' : <CardRoute title={c.name} number={c.number} delete={handleDelete} /* {SetCounter([...counter,counter.length + 1])} */ />)}
+                                        {titleCard.map(c => c === undefined ? '' : <CardRoute title={c.name} number={c.number} delete={handleDelete}/>)}
                                     </Card>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
                                     <Button className="mt-5" variant="primary" onClick={handleShow}>
-                                        Guardar
+                                    {t("trip-route.save")}
                                     </Button>
 
                                     <Modal show={show} onHide={handleClose}>
                                         <Modal.Header closeButton>
-                                            <Modal.Title>Pon un nombre a tu viaje</Modal.Title>
+                                            <Modal.Title>{t("trip-route.name-trip")}</Modal.Title>
                                         </Modal.Header>
-                                        <Form onSubmit={handleTitle}>
+                                        <Form  className="m-3 p-1" onSubmit={handleTitle}>
                                             <Form.Control
                                                 className="mt-3"
                                                 name="tripName"
                                                 type="text"
-                                                placeholder="Dame un título"
+                                                placeholder={t("trip-route.name-trip-place-holder")}
                                             />
 
-                                            <Button variant="secondary" onClick={handleClose}>
-                                                Close
+                                            <Button className="m-3" variant="secondary" onClick={handleClose}>
+                                            {t("trip-route.close")}
                                             </Button>
-                                            <Button type="submit" variant="primary" onClick={SaveTrip}>
-                                                Save Changes
+                                            <Button className="m-3" type="submit" variant="primary" onClick={SaveTrip}>
+                                            {t("trip-route.save")}
                                             </Button>
                                         </Form>
                                     </Modal>
@@ -325,7 +328,7 @@ function TripRoute() {
                                         onClick={addPlace}
                                         className="border-0"
                                         style={{ marginLeft: "150px", backgroundColor: "rgb(58, 74, 61,0.8)" }}>
-                                        Añadir
+                                        {t("trip-route.add")}
                                     </Button>
                                 </Card.Text>
                             </Card>

@@ -68,14 +68,14 @@ function FooterOptions() {
                     </Col>
                     <Col
                         className="txt_options fs-5 mt-3"
-                        sx={{ span: 8, offset: 2 }}
+                        xs={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
                         lg={{ span: 4, offset: 1 }}
                         xl={{ span: 2, offset: 1 }}>
                         <Card text={theme.info} bg="transparent" className="border-0">
                             <Card.Text
-                                className=" mb-3"
+                                className="mb-3"
                             >
                                  {t("footer-options.option2")}
                             </Card.Text>
@@ -88,7 +88,7 @@ function FooterOptions() {
                     </Col>
                     <Col
                         className="txt_options fs-5 mt-3"
-                        sx={{ span: 8, offset: 2 }}
+                        xs={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
                         lg={{ span: 4, offset: 1 }}
@@ -108,7 +108,7 @@ function FooterOptions() {
                     </Col>
                     <Col
                         className="txt_options fs-5 mt-3"
-                        sx={{ span: 8, offset: 2 }}
+                        xs={{ span: 8, offset: 2 }}
                         sm={{ span: 4, offset: 1 }}
                         md={{ span: 4, offset: 1 }}
                         lg={{ span: 4, offset: 1 }}

@@ -29,7 +29,7 @@ function ThemeProvider({ children }) {
 
     const [theme, updateTheme] = useState(lightTheme)
     const [logName, setLogName]= useState('')
-    const [cardsText, setCardsText] = useState('')
+    const [cardsText, setCardsText] = useState()
     
    
 
