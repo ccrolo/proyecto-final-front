@@ -35,7 +35,7 @@ function CardRoute(props) {
 
     }
 
-     console.log(cardsText)
+  
 
 
 

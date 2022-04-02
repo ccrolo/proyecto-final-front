@@ -66,7 +66,8 @@ function CardsPersonalPage() {
         <Container className="container" fluid style={{ width: "100%" }}>
             <Row >
 
-                {arraytrip.map(t =>
+                {arraytrip.length=== 0? "": arraytrip.map(t =>
+                
                     <Col 
                        
                         xs={12}
@@ -76,7 +77,7 @@ function CardsPersonalPage() {
                         xl={6}>
 
                         <Card
-                            className="card_container border-5 border-warning bottom-0"
+                            className="card_container border-5 border-warning bottom-0 mb-5"
                             xs={12}
                             sm={6}
                             md={6}
@@ -98,7 +99,7 @@ function CardsPersonalPage() {
                                     <Carousel.Item>
 
 
-                                        <Image className="card_img" src={t[1][5]}></Image>
+                                         <Image className="card_img" src={t[1][5]}></Image> 
                                         <Carousel.Caption>
                                             <CardsTitle />
                                         </Carousel.Caption>
