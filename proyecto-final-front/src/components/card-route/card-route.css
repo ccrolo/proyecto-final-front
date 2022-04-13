@@ -1,0 +1,8 @@
+.focus{
+    border: 1px solid red;
+    outline: none;
+}
+
+.cursor:hover{
+    cursor:pointer;
+}
