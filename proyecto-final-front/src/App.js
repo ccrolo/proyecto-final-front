@@ -6,7 +6,6 @@ import LandingPage from './pages/landing-page/landing-page';
 import Registro from "./pages/registro/registro";
 import IniciarSesion from "./components/iniciar-sesion/iniciar-sesion";
 import Header from "./components/header/header";
-import CheckMail from "./components/check-mail/checkMail";
 import Validate from "./pages/validate/validate";
 import PersonalPage from "./pages/personal-page/personal-page";
 import PrivateLogin from "./private-routes/private-login";
@@ -33,7 +32,6 @@ function App() {
           <Route path='/' element={<LandingPage />}></Route>
           <Route path='/registro' element={<Registro />}></Route>
           <Route path='/iniciar-sesion' element={<IniciarSesion />}></Route>
-          <Route path='/checkMail' element={<CheckMail />}></Route>
           <Route path='/validate' element={<Validate />}></Route>
           <Route path='/personal' element={<PrivateLogin><PersonalPage /></PrivateLogin>}></Route>
           <Route path='/trip' element={<PrivateLogin><TripRoute/></PrivateLogin>}></Route>

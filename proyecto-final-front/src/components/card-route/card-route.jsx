@@ -23,8 +23,6 @@ function CardRoute(props) {
         localStorage.setItem('text', e.target.description.value)
         setCardsText(e.target.description.value)
        
-
-
     }
 
     const getInputText = () => {
@@ -32,15 +30,10 @@ function CardRoute(props) {
         setinput('notDisabled')
         setinputText(local)
 
-
     }
 
   
-
-
-
     return (
-
 
         <Card
             style={{ backgroundColor: "rgb(252, 250, 244, 0.6)", borderRadius: "10px", width: "97%" }}

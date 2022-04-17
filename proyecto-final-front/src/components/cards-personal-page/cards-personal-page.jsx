@@ -21,6 +21,7 @@ import CardsTitle from "../cards-title/cards-title"
 function CardsPersonalPage() {
     const { theme, updateTheme, changeTheme } = useContext(themeContext)
     const token = localStorage.getItem('token')
+    const email = localStorage.getItem('email')
     const [tripCards, setTripCards] = useState([])
     const [input, setinput] = useState('')
     const [text, setText] = useState('')

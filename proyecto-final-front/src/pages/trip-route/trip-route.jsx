@@ -18,6 +18,8 @@ import Button from "react-bootstrap/Button";
 import gif from "../../assets/gif3.gif"
 import CardRoute from "../../components/card-route/card-route"
 import Modal from "react-bootstrap/Modal"
+import {key} from "../../apikey.js"
+
 
 
 function MapChangeCenter({ center, zoom }) {
@@ -81,7 +83,7 @@ function TripRoute() {
         nextCityUpdate(firstCity)
         
 
-        fetch(`http://api.positionstack.com/v1/forward?access_key=45c3db208fca50fb47eda23e4b198c24&query=${firstCity}`)
+        fetch(`http://api.positionstack.com/v1/forward?access_key=${key}&query=${firstCity}`)
             .then(d => d.json())
             .then(data => {
                 console.log(data)
@@ -98,7 +100,7 @@ function TripRoute() {
         const nextCity = e.target.nextCity.value
         nextCityUpdate(nextCity)
 
-        fetch(`http://api.positionstack.com/v1/forward?access_key=45c3db208fca50fb47eda23e4b198c24&query=${nextCity}`)
+        fetch(`http://api.positionstack.com/v1/forward?access_key=${key}&query=${nextCity}`)
             .then(d => d.json())
             .then(data => {
                 console.log(data)
@@ -190,12 +192,12 @@ function TripRoute() {
                         xs={{ span: 10, offset: 0 }}
                         sm={{ span: 10, offset: 0 }}
                         md={{ span: 8, offset: 2 }}
-                        lg={{ span: 5, offset: 0 }}
+                        lg={{ span: 8, offset: 2 }}
                         xl={{ span: 5, offset: 0 }}>
 
                         <Card
                             className="mt-5 border-0 mb-1 ms-3 me-3 pt-5 pb-5  text-center"
-                            style={{ backgroundColor: "rgb(58, 74, 61,0.6)", width: "100%", height: "100vh" }}>
+                            style={{ backgroundColor: "rgb(58, 74, 61,0.6)", width: "100%", height: "1230px" }}>
 
                             <Row className="justify-content-center">
                                 <Col
@@ -273,7 +275,7 @@ function TripRoute() {
                                     lg={{ span: 9, offset: 0 }}
                                     xl={{ span: 9, offset: 0 }}>
                                     <Card
-                                        style={{ backgroundColor: "rgb(252, 250, 244, 0.2)", borderRadius: "10px", width: "100%", height: "350px" }}
+                                        style={{ backgroundColor: "rgb(252, 250, 244, 0.2)", borderRadius: "10px", width: "100%", height: "700px" }}
                                         className="p-2 border-0 scroll">
                                         {titleCard.map(c => c === undefined ? '' : <CardRoute title={c.name} number={c.number} delete={handleDelete}/>)}
                                     </Card>
@@ -319,7 +321,7 @@ function TripRoute() {
                         xl={{ span: 5, offset: 0 }}>
                         <Card
                             className="mt-5 border-0 mb-1 ms-3 me-3 p-3  text-center"
-                            style={{ backgroundColor: "rgb(58, 74, 61,0.6)", width: "100%", height: "100vh" }}>
+                            style={{ backgroundColor: "rgb(58, 74, 61,0.6)", width: "100%", height: "1230px" }}>
                             <Card
                                 className="border-0 mb-2"
                                 style={{ backgroundColor: "rgb(252, 250, 244, 0.7)", height: "7%" }}>

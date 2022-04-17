@@ -37,6 +37,7 @@ function IniciarSesion() {
             console.log(info)
             localStorage.setItem('token',data.access_token)
             localStorage.setItem('name',info.name)
+            localStorage.setItem('email',info.email)
             navigate('/personal');
           })
         console.log(data.access_token)
